@@ -4,12 +4,12 @@ import { CanceledError } from "axios";
 import useData from "./useData";
 
 
-interface Genre {
+export interface Genre {
     id:number;
     name:string;
     image_background:string;
 }
 
-const useGenre = () => useData<Genre>('/genres')
+const useGenres = () => useData<Genre>('/genres')
   
-  export default useGenre;
+  export default useGenres;
