@@ -14,9 +14,10 @@ import useGenres, { Genre } from "../hooks/useGenres";
 
 interface Props {
   onSelectGenre: (genre: Genre) => void;
+  selectedGenre: Genre | null;
 }
 
-const GenreList = ({ onSelectGenre }: Props) => {
+const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
   const { data, error, isLoading } = useGenres();
 
   return (
@@ -37,6 +38,7 @@ const GenreList = ({ onSelectGenre }: Props) => {
                 variant="link"
                 fontSize="lg"
                 key={genre.id}
+                fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
                 onClick={() => onSelectGenre(genre)}
               >
                 {genre.name}
