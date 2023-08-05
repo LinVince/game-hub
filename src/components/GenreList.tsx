@@ -3,6 +3,7 @@ import useGenre from "../hooks/useGenres";
 import {
   Button,
   HStack,
+  Heading,
   Image,
   List,
   ListItem,
@@ -24,7 +25,9 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
     <>
       {error && null}
       {isLoading && <Spinner />}
-
+      <Heading fontSize="2xl" marginBottom={5}>
+        Genres
+      </Heading>
       <List>
         {data.map((genre) => (
           <ListItem key={genre.id} paddingY="5px">
@@ -33,6 +36,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
                 boxSize="32px"
                 borderRadius="8px"
                 src={getCropedImageUrl(genre.image_background)}
+                objectFit="cover"
               />
               <Button
                 variant="link"
@@ -40,6 +44,8 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
                 key={genre.id}
                 fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
                 onClick={() => onSelectGenre(genre)}
+                whiteSpace="normal"
+                textAlign="left"
               >
                 {genre.name}
               </Button>
