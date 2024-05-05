@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
-import apiClient from "../services/api-client";
-import { CanceledError } from "axios";
-import useData from "./useData";
-import genres from '../data/genres'
+import { useQuery } from '@tanstack/react-query';
+import ms from 'ms';
+import genres from '../data/genres';
+import APIClient from '../services/api-client';
+import Genre from '../entities/Genre';
 
-export interface Genre {
-    id:number;
-    name:string;
-    image_background:string;
-}
+const apiClient = new APIClient<Genre>('/genres');
 
-const useGenres = () => ({data:genres, isLoading:false, error:false})
-  
-  export default useGenres;
+const useGenres = () =>
+  useQuery({
+    queryKey: ['genres'],
+    queryFn: apiClient.getAll,
+    staleTime: ms('24h'),
+    initialData: genres,
+  });
+
+export default useGenres;
